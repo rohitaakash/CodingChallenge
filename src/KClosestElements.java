@@ -16,31 +16,46 @@ public class KClosestElements {
 
 	public static int[] getKClosestElements(int[] arr, int num, int k) {
 
-		Queue<Integer> maxHeap = new PriorityQueue<>(k, new Comparator<Integer>() {
+		Queue<Elements> maxHeap = new PriorityQueue<>(k, new Comparator<Elements>() {
 
 			@Override
-			public int compare(Integer arg0, Integer arg1) {
+			public int compare(Elements arg0, Elements arg1) {
 				// TODO Auto-generated method stub
-				return arg1 - arg0;
+				return arg1.distance - arg0.distance;
 			}
 
 		});
 
+		Elements temp = null;
 		for (int i = 0; i < k; i++) {
-			maxHeap.add(Math.abs(num - arr[i]));
+			temp = new Elements(Math.abs(num - arr[i]), i);
+			maxHeap.add(temp);
 		}
 
 		for (int i = k; i < arr.length; i++) {
-			if (!maxHeap.isEmpty() && maxHeap.peek() > Math.abs(num - arr[i]))
-				maxHeap.add(Math.abs(num - arr[i]));
+			if (!maxHeap.isEmpty() && maxHeap.peek().distance > Math.abs(num - arr[i])) {
+				maxHeap.poll();
+				temp = new Elements(Math.abs(num - arr[i]), i);
+				maxHeap.add(temp);
+			}
 		}
 
 		int[] output = new int[k];
 		for (int i = 0; i < k; i++) {
-			output[i] = maxHeap.poll() + num;
+			output[i] = arr[maxHeap.poll().index];
 		}
 
 		return output;
 	}
 
+}
+
+class Elements{
+	int distance;
+	int index;
+	
+	public Elements(int distance, int index) {
+		this.distance = distance;
+		this.index = index;
+	}
 }
