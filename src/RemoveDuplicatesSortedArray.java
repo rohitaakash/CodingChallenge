@@ -1,10 +1,3 @@
-/*
- * Copyright (c) 2018 Financial Engines, Inc.  All Rights Reserved.
- * Sunnyvale, CA
- *
- * File: RemoveDuplicatesSortedArray.java
- * Author: raakash
- */
 
 public class RemoveDuplicatesSortedArray {
 
