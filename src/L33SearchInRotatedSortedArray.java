@@ -3,11 +3,8 @@ public class L33SearchInRotatedSortedArray {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		int[] nums = {4,5,6,7,0,1,2};
-//		System.out.println(search(nums, 0));
 		int[] nums = { 5,1,2,3,4 };
 		System.out.println(search(nums, 4));
-
 	}
 
 	public static int search(int[] nums, int target) {
