@@ -37,9 +37,6 @@ public class NonNegativeConsecutiveOnes {
 	public static void main(String[] args) {
 
 		System.out.println(findIntegers(123456789));
-		char c ='A';
-		String s = "Hi";
-		Character c1 = new Character('a');
 		
 		System.out.println();
 

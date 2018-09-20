@@ -5,7 +5,7 @@ public class CountCompleteTreeNodes {
 
 	}
 
-	public int countNodes(Node root) {
+	public int countNodes(BTNode root) {
 		
 if(root == null) return 0;
 		
@@ -17,7 +17,7 @@ if(root == null) return 0;
 		
 	}
 	
-	public int getHeight(Node root) {
+	public int getHeight(BTNode root) {
 		int height = 0;
 		while(root != null) {
 			height += 1;
@@ -31,8 +31,8 @@ if(root == null) return 0;
 
 class Node {
 	int val;
-	Node left;
-	Node right;
+	BTNode left;
+	BTNode right;
 
 	Node(int x) {
 		val = x;
