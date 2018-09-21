@@ -3,8 +3,8 @@ public class L33SearchInRotatedSortedArray {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] nums = { 5,1,2,3,4 };
-		System.out.println(search(nums, 4));
+		int[] nums = { 4,5,6,7,0,1,2 };
+		System.out.println(search(nums, 0));
 	}
 
 	public static int search(int[] nums, int target) {
@@ -13,7 +13,7 @@ public class L33SearchInRotatedSortedArray {
 			return -1;
 		return binarySearch(nums, 0, nums.length - 1, target);
 	}
-
+	
 	public static int binarySearch(int[] nums, int start, int end, int target) {
 
 		int mid = (start + end) / 2;
@@ -22,15 +22,16 @@ public class L33SearchInRotatedSortedArray {
 
 		if(nums[mid] == target) return mid;
 		
-		int left = -1, right = -1;
+		if(nums[mid] > nums[start]) {
+			if(target < nums[mid] && target >= nums[start])
+				return binarySearch(nums, start, mid-1, target);
+			else return binarySearch(nums, mid+1, end, target);
+		}else {
+			if(target > nums[mid] && target <= nums[end])
+				return binarySearch(nums, mid+1, end, target);
+			else return binarySearch(nums, start, mid-1, target);
+		}
 		
-		if(mid > start) left = binarySearch(nums, start, mid-1, target);
-		if(mid < end) right = binarySearch(nums, mid+1, end, target);
-		
-		if(left == -1 && right == -1) return -1;
-		else
-			if(left != -1) return left;
-			else return right;
 	}
 
 }
