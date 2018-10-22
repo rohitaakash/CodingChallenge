@@ -1,6 +1,6 @@
 public class VisibleNodesInBinaryTree {
 
-    public static int numberOfVisibleNodes(Tree root) {
+    private static int numberOfVisibleNodes(Tree root) {
 
         return numberOfVisibleNodes(root, Integer.MIN_VALUE);
 
@@ -31,12 +31,13 @@ public class VisibleNodesInBinaryTree {
 }
 
 class Tree {
+    int val;
+    Tree l;
+    Tree r;
 
-    public int val;
-    public Tree l;
-    public Tree r;
-
-    public Tree(int v) {
+    Tree(int v) {
         val = v;
+        l = null;
+        r = null;
     }
 }
