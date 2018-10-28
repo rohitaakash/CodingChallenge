@@ -7,12 +7,14 @@ public class MaximalFruit {
         int[] A = {1, 2, 1, 3, 4, 3, 5, 1, 2};
         int[] B = {1, 2, 1, 2, 1, 2, 1};
         int[] C = {1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 1};
+        int[] D = {1, 0, 3, 4, 3};
         System.out.println(maximalFruit(A));
         System.out.println(maximalFruit(B));
         System.out.println(maximalFruit(C));
         System.out.println(maximalFruitOptimized(A));
         System.out.println(maximalFruitOptimized(B));
         System.out.println(maximalFruitOptimized(C));
+        System.out.println(maximalFruitOptimized(D));
     }
 
     private static int maximalFruit(int[] A) {
@@ -35,31 +37,29 @@ public class MaximalFruit {
         return maxCount;
     }
 
-    private static int maximalFruitOptimized(int[] A) {
+    private static int maximalFruitOptimized(int[] tree) {
 
-        if(A.length < 3) return A.length;
+        if (tree.length < 3) return tree.length;
 
-        int maxCount = Integer.MIN_VALUE, count = 2, prev_fruit = A[0], curr_fruit = A[1], prev_index = 0;
+        int maxCount = Integer.MIN_VALUE, count = 2, prev_index = 0;
         Set<Integer> set = new HashSet<>();
-        set.add(A[0]);
-        set.add(A[1]);
-        for (int i = 2; i < A.length; i++) {
-            if (set.contains(A[i])) {
+        set.add(tree[0]);
+        set.add(tree[1]);
+        for (int i = 2; i < tree.length; i++) {
+            if (set.contains(tree[i])) {
                 count++;
             } else {
-                if(set.size() == 2) {
-                    set.remove(prev_fruit);
-                    count = count - prev_index;
+                if (set.size() == 2) {
+                    set.remove(tree[prev_index]);
+                    count = i - prev_index;
                 } else {
                     count++;
                 }
-                set.add(A[i]);
+                set.add(tree[i]);
             }
 
-            if (A[i] != curr_fruit) {
-                prev_fruit = curr_fruit;
-                prev_index = i - 1;
-                curr_fruit = A[i];
+            if (tree[i] != tree[i-1]) {
+                prev_index = i-1;
             }
 
             if (maxCount < count)
