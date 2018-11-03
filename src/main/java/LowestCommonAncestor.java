@@ -14,7 +14,7 @@ public class LowestCommonAncestor {
 		BufferedReader in = new BufferedReader(reader);
 		String line;
 
-		BinarySearchTree bst = new BinarySearchTree();
+		BlackRockBST bst = new BlackRockBST();
 		bst.insert(30);
 		bst.insert(8);
 		bst.insert(52);
@@ -54,7 +54,7 @@ class BTNode {
 	}
 }
 
-class BinarySearchTree {
+class BlackRockBST {
 
 	BTNode root;
 
