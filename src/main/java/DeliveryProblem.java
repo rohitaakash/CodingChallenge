@@ -28,12 +28,7 @@ public class DeliveryProblem {
                                                     int numDeliveries)
     {
         // WRITE YOUR CODE HERE
-        PriorityQueue<List<Integer>> pq = new PriorityQueue<>(numDeliveries, new Comparator<List<Integer>>() {
-            @Override
-            public int compare(List<Integer> o1, List<Integer> o2) {
-                return (o2.get(0)*o2.get(0) + o2.get(1)*o2.get(1)) - (o1.get(0)*o1.get(0) + o1.get(1)*o1.get(1));
-            }
-        });
+        PriorityQueue<List<Integer>> pq = new PriorityQueue<>(numDeliveries, (o1, o2) -> (o2.get(0)*o2.get(0) + o2.get(1)*o2.get(1)) - (o1.get(0)*o1.get(0) + o1.get(1)*o1.get(1)));
 
         for(int i=0; i<numDestinations; i++) {
             if(i < numDeliveries) pq.add(allLocations.get(i));
