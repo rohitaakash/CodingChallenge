@@ -4,7 +4,14 @@ import java.util.Map;
 public class L138CopyListWithRandomPointer {
 
     public static void main(String[] args) {
-
+        RandomListNode head = new RandomListNode(1);
+        head.next = new RandomListNode(2);
+        head.next.next = new RandomListNode(3);
+        head.next.next.next = new RandomListNode(4);
+        head.next.next.next.next = new RandomListNode(5);
+        head.next.next.next.next.next = new RandomListNode(6);
+        printRandomListNode(head);
+        printRandomListNode(copyRandomListOptimized(head));
     }
 
     private static RandomListNode copyRandomList(RandomListNode head) {
@@ -42,49 +49,41 @@ public class L138CopyListWithRandomPointer {
     private static RandomListNode copyRandomListOptimized(RandomListNode head) {
         if (head == null) return null;
 
-        RandomListNode copy = new RandomListNode(head.label);
+        RandomListNode original = head;
+        while (original != null) {
+            RandomListNode copy = new RandomListNode(original.label);
+            copy.next = original.next;
+            original.next = copy;
+            original = copy.next;
+        }
 
-        RandomListNode tempCopy = copy;
+        original = head;
+        while (original != null) {
+            if (original.random != null) original.next.random = original.random.next;
+            original = original.next.next;
+        }
+
+        original = head;
+        RandomListNode copyHead = head.next;
+        while (original != null) {
+            RandomListNode copy = original.next;
+            original.next = original.next.next;
+            if(copy.next != null) copy.next = copy.next.next;
+            original = original.next;
+        }
+
+        return copyHead;
+    }
+
+    private static void printRandomListNode(RandomListNode head) {
         RandomListNode temp = head;
-
-        while (temp != null) {
-            if (temp.next != null)
-                tempCopy.next = new RandomListNode(temp.next.label);
-            tempCopy = tempCopy.next;
+        while(temp != null) {
+            System.out.print(temp.label);
             temp = temp.next;
+            if(temp != null)
+                System.out.print("->");
         }
-
-        temp = head;
-        tempCopy = copy;
-
-        while(tempCopy != null) {
-            RandomListNode old = temp.next;
-            temp.next = tempCopy;
-            tempCopy.random = temp;
-            temp = old;
-            tempCopy = tempCopy.next;
-        }
-
-        temp = head;
-        tempCopy = copy;
-
-        while(tempCopy != null) {
-            if(temp.random != null) {
-                tempCopy.random = temp.random.next;
-                if(temp.next.next != null) {
-                    temp.next = temp.next.next.random;
-                }else{
-                    temp.next = null;
-                }
-
-            }else{
-                tempCopy.random = null;
-            }
-            tempCopy = tempCopy.next;
-            temp = temp.next;
-        }
-
-        return copy;
+        System.out.println();
     }
 }
 
